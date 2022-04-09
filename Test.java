@@ -1,10 +1,15 @@
+package leetcode;
+
 import java.util.ArrayList;
 
 public class Test {
     public static void main(String[] args) {
         Test t = new Test();
 
-        t.findMedianSortedArrays(new int[]{1, 2, 3}, new int[]{1, 2, 3});
+        int[] a = {};
+        int[] b = {};
+
+        System.out.println(t.findMedianSortedArrays(a, b));
     }
 
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
@@ -23,14 +28,14 @@ public class Test {
                 rel.add(curr, nums2[posTwo]);
                 posTwo++;
                 curr++;
-                break;
+                continue;
             }
 
             if (posTwo == nums2.length) {
                 rel.add(curr, nums1[posOne]);
                 posOne++;
                 curr++;
-                break;
+                continue;
             }
 
             if (nums1[posOne] > nums2[posTwo]) {
