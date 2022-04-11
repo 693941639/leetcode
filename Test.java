@@ -6,22 +6,25 @@ public class Test {
     public static void main(String[] args) {
         Test t = new Test();
 
-        System.out.println(t.longestPalindrome("ababbbbbbbbb"));
+        System.out.println(t.longestPalindrome("abbbbbsadjkzncmzxcvbbjhbbbbbbbbb"));
     }
 
     public String longestPalindrome(String s) {
         int max = 0;
+        int type = 0;
+
         boolean isEqual = true;
         StringBuffer rel = new StringBuffer();
 
-        int type = (s.length() & 1);
-
-        type = (type == 1) ? 0 : 1;
-
         for (int i = 0; i < s.length() - 1; i++) {
-            int start = i;
             int last = s.lastIndexOf(s.substring(i, i + 1));
+            if (last == i) {
+                continue;
+            }
+            int start = i;
             int end = last;
+
+            type = (last - start) & 1;
 
             if (end > start) {
                 while (end - start != type) {
@@ -34,7 +37,7 @@ public class Test {
                 if (isEqual && (last - i + 1) > max) {
                     max = last - i + 1;
                     rel.setLength(0);
-                    rel.append(s.substring(i, max));
+                    rel.append(s.substring(i, last + 1));
                 }
             }
         }
