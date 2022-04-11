@@ -6,7 +6,7 @@ public class Test {
     public static void main(String[] args) {
         Test t = new Test();
 
-        System.out.println(t.longestPalindrome("abbbbbbbbbbbbbba"));
+        System.out.println(t.longestPalindrome("ababbbbbbbbb"));
     }
 
     public String longestPalindrome(String s) {
@@ -43,10 +43,6 @@ public class Test {
     }
 
     public boolean checkSame(String s, int firstIndex, int secondIndex) {
-        if (s.substring(firstIndex, firstIndex + 1).equals(s.substring(secondIndex, secondIndex + 1))) {
-            return true;
-        }
-
-        return false;
+        return s.substring(firstIndex, firstIndex + 1).equals(s.substring(secondIndex, secondIndex + 1));
     }
 }
