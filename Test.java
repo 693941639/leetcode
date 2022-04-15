@@ -10,34 +10,16 @@ public class Test {
     }
 
     public String longestPalindrome(String s) {
+        StringBuilder rel = new StringBuilder();
+        String test = "";
         int max = 0;
-        int type = 0;
 
-        boolean isEqual = true;
-        StringBuffer rel = new StringBuffer();
-
-        for (int i = 0; i < s.length() - 1; i++) {
-            int last = s.lastIndexOf(s.substring(i, i + 1));
-            if (last == i) {
-                continue;
-            }
-            int start = i;
-            int end = last;
-
-            type = (last - start) & 1;
-
-            if (end > start) {
-                while (end - start != type) {
-                    if (!this.checkSame(s, start++, end--)) {
-                        isEqual = false;
-                        break;
-                    }
-                }
-
-                if (isEqual && (last - i + 1) > max) {
-                    max = last - i + 1;
+        for (int i = 0; i < s.length(); i++) {
+            for (int j = i + 1; j < s.length(); j++) {
+                test = s.substring(i, j);
+                if (checkSame(test) && test.length() > max) {
                     rel.setLength(0);
-                    rel.append(s.substring(i, last + 1));
+                    rel.append(test);
                 }
             }
         }
@@ -45,7 +27,14 @@ public class Test {
         return rel.toString();
     }
 
-    public boolean checkSame(String s, int firstIndex, int secondIndex) {
-        return s.substring(firstIndex, firstIndex + 1).equals(s.substring(secondIndex, secondIndex + 1));
+    public boolean checkSame(String s) {
+        int len = s.length();
+        for (int i = 0; i < len / 2; i++) {
+            if (!s.substring(i, i + 1).equals(s.substring(len - i - 1))) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
