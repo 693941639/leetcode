@@ -6,35 +6,37 @@ public class Test {
     public static void main(String[] args) {
         Test t = new Test();
 
-        System.out.println(t.longestPalindrome("abbbbbsadjkzncmzxcvbbjhbbbbbbbbb"));
+        System.out.println(t.longestPalindrome("abcdd"));
     }
 
     public String longestPalindrome(String s) {
-        StringBuilder rel = new StringBuilder();
-        String test = "";
-        int max = 0;
-
-        for (int i = 0; i < s.length(); i++) {
-            for (int j = i + 1; j < s.length(); j++) {
-                test = s.substring(i, j);
-                if (checkSame(test) && test.length() > max) {
-                    rel.setLength(0);
-                    rel.append(test);
-                }
-            }
+        if (s.length() <= 1) {
+            return s;
         }
 
-        return rel.toString();
-    }
+        char[] chars = s.toCharArray();
 
-    public boolean checkSame(String s) {
-        int len = s.length();
-        for (int i = 0; i < len / 2; i++) {
-            if (!s.substring(i, i + 1).equals(s.substring(len - i - 1))) {
-                return false;
+        int arrLength = chars.length;
+
+        int maxLenght = 0;
+        String maxStr = "";
+
+        for (int i = 0; i < arrLength; i++) {
+            if (i == 0 && chars[0] == chars[1] && maxLenght < 2) {
+                maxLenght = 2;
+                maxStr = s.substring(0, 2);
+                continue;
             }
+
+            if (i == arrLength - 1 && chars[arrLength - 1] == chars[arrLength - 2] && maxLenght < 2) {
+                maxLenght = 2;
+                maxStr = s.substring(arrLength - 2, arrLength);
+                continue;
+            }
+
+            
         }
 
-        return true;
+        return maxStr;
     }
 }
